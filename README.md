@@ -1,8 +1,8 @@
 # timer #
 
-`timer` is a small utility package, used in [git-in-sync](https://github.com/jychri/git-in-sync).
+`timer` is a small package, used in [git-in-sync](https://github.com/jychri/git-in-sync).
 
-Package `timer` records Moments inside of a Timer. 
+Package `timer` records `Moments` inside of a `Timer`. 
 
 ```go
 // Moment marks moments in time.
