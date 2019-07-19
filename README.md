@@ -1,6 +1,6 @@
 # timer #
 
-`timer` is a small package, used in [git-in-sync](https://github.com/jychri/git-in-sync).
+`timer` is a small package, used by [git-in-sync](https://github.com/jychri/git-in-sync).
 
 Package `timer` records `Moments` inside of a `Timer`. 
 
