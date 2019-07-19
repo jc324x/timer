@@ -1,4 +1,4 @@
-// Package timer records Moments.
+// Package timer records Moments in time.
 package timer
 
 import (
@@ -11,12 +11,12 @@ const (
 	M time.Duration = time.Millisecond
 )
 
-// Moment marks moments in time.
+// Moment marks a moment in time.
 type Moment struct {
-	Name  string
-	Time  time.Time
-	Start time.Duration // duration since start
-	Split time.Duration // duration since last moment
+	Name    string
+	Time    time.Time
+	Elapsed time.Duration // time since start
+	Split   time.Duration // time since last moment
 }
 
 // Timer collects Moments.
@@ -26,35 +26,35 @@ type Timer struct {
 
 // Init initializes a *Timer with a Start Moment.
 func Init() *Timer {
-	ti := new(Timer)
-	st := Moment{Name: "Start", Time: time.Now()} // (st)art
-	ti.Moments = append(ti.Moments, st)
-	return ti
+	ti := new(Timer)                              // new Timer
+	st := Moment{Name: "Start", Time: time.Now()} // initialize starting Moment
+	ti.Moments = append(ti.Moments, st)           // append the starting Moment
+	return ti                                     // return *Timer
 }
 
 // Mark marks a moment in time as a Moment and appends t.Moments.
 func (ti *Timer) Mark(s string) {
-	sm := ti.Moments[0]                          // (s)tarting (m)oment
-	lm := ti.Moments[len(ti.Moments)-1]          // (l)ast (m)oment
-	m := Moment{Name: s, Time: time.Now()}       // name and time
-	m.Start = time.Since(sm.Time).Truncate(1000) // duration since start
-	m.Split = m.Start - lm.Start                 // duration since last moment
-	ti.Moments = append(ti.Moments, m)           // append Moment
+	sm := ti.Moments[0]                            // starting Moment
+	lm := ti.Moments[len(ti.Moments)-1]            // last Moment
+	m := Moment{Name: s, Time: time.Now()}         // initialize Moment with name and time
+	m.Elapsed = time.Since(sm.Time).Truncate(1000) // total elapsed time as a Duration
+	m.Split = m.Elapsed - lm.Elapsed               // time since last Moment as a Duration
+	ti.Moments = append(ti.Moments, m)             // append Moment
 }
 
-// Time returns the elapsed time at the last recorded moment in *Timer.
-func (ti *Timer) Time() time.Duration {
-	lm := ti.Moments[len(ti.Moments)-1] // (l)ast (m)oment
-	return lm.Start
+// Elapsed returns the elapsed time at the last recorded moment.
+func (ti *Timer) Elapsed() time.Duration {
+	lm := ti.Moments[len(ti.Moments)-1] // last moment
+	return lm.Elapsed
 }
 
-// Split returns the split time for the last recorded moment in *Timer.
+// Split returns the split time for the last recorded moment.
 func (ti *Timer) Split() time.Duration {
-	lm := ti.Moments[len(ti.Moments)-1] // (l)ast (m)oment
+	lm := ti.Moments[len(ti.Moments)-1] // last moment
 	return lm.Split
 }
 
-// Get returns a Moment and an error value from a *Timer.
+// Get returns a Moment given its name.
 func (ti *Timer) Get(s string) (Moment, error) {
 	for _, m := range ti.Moments {
 		if m.Name == s {
