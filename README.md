@@ -3,7 +3,8 @@ timer
 
 [![Go Report Card](https://goreportcard.com/badge/github.com/jychri/timer)](https://goreportcard.com/report/github.com/jychri/timer) [![GoDoc](https://godoc.org/github.com/jychri/timer?status.svg)](https://godoc.org/github.com/jychri/timer)
 
-Package timer 
+Package timer marks moments in time as `Moments`, collected in a
+`Timer`. 
 
 ```go
 // Moment marks moments in time.
