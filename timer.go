@@ -1,4 +1,4 @@
-// Package timer records Moments in time.
+// Package timer records moments in time.
 package timer
 
 import (

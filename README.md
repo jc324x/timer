@@ -1,6 +1,10 @@
 timer
 =====
 
+[![Go Report Card](https://goreportcard.com/badge/github.com/jychri/timer)](https://goreportcard.com/report/github.com/jychri/timer) [![GoDoc](https://godoc.org/github.com/jychri/timer?status.svg)](https://godoc.org/github.com/jychri/timer)
+
+Package timer 
+
 ```go
 // Moment marks moments in time.
 type Moment struct {
@@ -28,8 +32,8 @@ func Init() *Timer {
 }
 ```
 
-When a `Moment` is added to the `Timer`, its `Start` and `Split` values are
-calculated against the previous `Moment` and the Start `Moment`.
+When a `Moment` is added to the `Timer` with `Mark`, its `Start` and `Split` values are
+set relative to the preceding `Moment` and the Start `Moment`.
 
 ```go
 // Mark marks a moment in time as a Moment and appends t.Moments.
@@ -43,8 +47,8 @@ func (ti *Timer) Mark(s string) {
 }
 ```
 
-You can get information about the last `Moment` with `Time` and
-`Split` methods. `Get` provides access to a specific `Moment`.
+`Time` and `Split` return the elapsed time and last split times 
+as `time.Duration`.
 
 ```go
 // Time returns the elapsed time at the last recorded moment in *Timer.
@@ -58,7 +62,11 @@ func (ti *Timer) Split() time.Duration {
   lm := ti.Moments[len(ti.Moments)-1] // last moment
   return lm.Split
 }
+```
 
+`Get` provides access to a specific `Moment` in a `Timer`.
+
+``` go
 // Get returns a Moment and an error value from a *Timer.
 func (ti *Timer) Get(s string) (Moment, error) {
   for _, m := range ti.Moments {
