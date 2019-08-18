@@ -21,7 +21,7 @@ type Timer struct {
 }
 ```
 
-A `Timer` is initialized with a Start `Moment`.
+A `*Timer` is initialized with a Start `Moment`.
 
 ```go
 // Init initializes a *Timer with a Start Moment.
@@ -33,7 +33,7 @@ func Init() *Timer {
 }
 ```
 
-When a `Moment` is added to the `Timer` with `Mark`, its `Start` and `Split` values are
+When a `Moment` is added to the `*Timer` with `Mark`, its `Start` and `Split` values are
 set relative to the preceding `Moment` and the Start `Moment`.
 
 ```go
@@ -65,7 +65,7 @@ func (ti *Timer) Split() time.Duration {
 }
 ```
 
-`Get` provides access to a specific `Moment` in a `Timer`.
+`Get` provides access to a specific `Moment` in a `*Timer`.
 
 ``` go
 // Get returns a Moment given its name.
@@ -80,3 +80,8 @@ func (ti *Timer) Get(s string) (Moment, error) {
   return em, errors.New("no moment found")
 }
 ```
+
+## Projects ## 
+
+- [git-in-sync](https://github.com/jychri/git-in-sync): Keep all of
+  your git repos in sync across multiple computers
