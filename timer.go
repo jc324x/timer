@@ -1,4 +1,4 @@
-// Package timer records moments in time.
+// Package timer marks moments in time.
 package timer
 
 import (
@@ -36,7 +36,7 @@ func Init() *Timer {
 func (ti *Timer) Mark(s string) {
 	sm := ti.Moments[0]                            // starting Moment
 	lm := ti.Moments[len(ti.Moments)-1]            // last Moment
-	m := Moment{Name: s, Time: time.Now()}         // initialize Moment with name and time
+	m := Moment{Name: s, Time: time.Now()}         // initialize with name and current time
 	m.Elapsed = time.Since(sm.Time).Truncate(1000) // total elapsed time as a Duration
 	m.Split = m.Elapsed - lm.Elapsed               // time since last Moment as a Duration
 	ti.Moments = append(ti.Moments, m)             // append Moment
