@@ -48,7 +48,7 @@ func (ti *Timer) Mark(s string) {
 }
 ```
 
-`Elapsed` and `Split` return `time.Duration` at the last recorded
+`Elapsed` and `Split` return `time.Duration` values for the last recorded
 moment.
 
 ```go
